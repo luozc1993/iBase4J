@@ -4,12 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.alibaba.csp.sentinel.init.InitExecutor;
-
 @SpringBootApplication(scanBasePackages = {"top.ibase4j", "org.ibase4j"})
 public class SysServiceApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
-        InitExecutor.doInit();
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
         SpringApplication.run(SysServiceApplication.class, args);
     }
 }

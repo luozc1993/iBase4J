@@ -16,7 +16,7 @@ import org.ibase4j.service.SysMsgService;
 import org.ibase4j.service.SysParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -27,10 +27,9 @@ import com.aliyuncs.dyvmsapi.model.v20170525.SingleCallByTtsResponse;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.baomidou.mybatisplus.toolkit.IdWorker;
-import com.weibo.api.motan.config.springsupport.annotation.MotanService;
 
-import top.ibase4j.core.Constants.MSGCHKTYPE;
+import top.ibase4j.core.Constants.MsgChkType;
+import top.ibase4j.core.support.generator.Sequence;
 import top.ibase4j.core.util.CacheUtil;
 import top.ibase4j.core.util.DateUtil;
 import top.ibase4j.core.util.InstanceUtil;
@@ -42,7 +41,6 @@ import top.ibase4j.core.util.InstanceUtil;
  * @since 2017年3月16日 下午2:38:44
  */
 @Service(interfaceClass = SendMsgService.class)
-@MotanService(interfaceClass = SendMsgService.class)
 public class SendMsgServiceImpl implements SendMsgService {
     protected Logger logger = LogManager.getLogger(getClass());
     @Autowired
@@ -109,7 +107,7 @@ public class SendMsgServiceImpl implements SendMsgService {
                     response.setMessage(paramService.getValue(response.getCode(), response.getMessage()));
                 }
             } else {
-                record.setBizId(IdWorker.get32UUID());
+                record.setBizId(Sequence.uuid());
                 record.setSendState("0");
             }
             record.setType(paramService.getName(type));
@@ -175,7 +173,7 @@ public class SendMsgServiceImpl implements SendMsgService {
                     record.setSendState("0");
                 }
             } else {
-                record.setBizId(IdWorker.get32UUID());
+                record.setBizId(Sequence.uuid());
                 record.setSendState("0");
             }
             record.setType(paramService.getName(type));
@@ -196,31 +194,31 @@ public class SendMsgServiceImpl implements SendMsgService {
         String cacheKey1, cacheKey2;
         switch (sendMsg.getBizType()) {
         case "1":// 用户注册验证码
-            cacheKey2 = MSGCHKTYPE.REGISTER + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.REGISTER + sendMsg.getPhone();
             sendRandomCode(sendMsg, cacheKey2);
             break;
         case "2":// 登录确认验证码
-            cacheKey1 = MSGCHKTYPE.LOGIN + DateUtil.getDate() + "_" + sendMsg.getPhone();
-            cacheKey2 = MSGCHKTYPE.LOGIN + sendMsg.getPhone();
+            cacheKey1 = MsgChkType.LOGIN + DateUtil.getDate() + "_" + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.LOGIN + sendMsg.getPhone();
             String times = StringUtils.defaultIfBlank(paramService.getValue("LOGIN_DAILY_TIMES"), "3");
             String msg = StringUtils.defaultIfBlank(paramService.getValue("LOGIN_LIMIT_MSG"), "您今天登录的次数已达到最大限制。");
             CacheUtil.refreshTimes(cacheKey1, 60 * 60 * 24, Integer.parseInt(times), msg);
             sendRandomCode(sendMsg, cacheKey2);
             break;
         case "3":// 修改密码验证码
-            cacheKey2 = MSGCHKTYPE.CHGPWD + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.CHGPWD + sendMsg.getPhone();
             sendRandomCode(sendMsg, cacheKey2);
             break;
         case "4":// 身份验证验证码
-            cacheKey2 = MSGCHKTYPE.VLDID + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.VLDID + sendMsg.getPhone();
             sendRandomCode(sendMsg, cacheKey2);
             break;
         case "5":// 信息变更验证码
-            cacheKey2 = MSGCHKTYPE.CHGINFO + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.CHGINFO + sendMsg.getPhone();
             sendRandomCode(sendMsg, cacheKey2);
             break;
         case "6":// 活动确认验证码
-            cacheKey2 = MSGCHKTYPE.AVTCMF + sendMsg.getPhone();
+            cacheKey2 = MsgChkType.AVTCMF + sendMsg.getPhone();
             sendRandomCode(sendMsg, cacheKey2);
             break;
         default:

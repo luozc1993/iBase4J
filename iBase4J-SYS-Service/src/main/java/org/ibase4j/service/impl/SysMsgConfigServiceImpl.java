@@ -5,8 +5,7 @@ import org.ibase4j.model.SysMsgConfig;
 import org.ibase4j.service.SysMsgConfigService;
 import org.springframework.cache.annotation.CacheConfig;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import com.weibo.api.motan.config.springsupport.annotation.MotanService;
+import org.apache.dubbo.config.annotation.Service;
 
 import top.ibase4j.core.base.BaseServiceImpl;
 
@@ -20,7 +19,6 @@ import top.ibase4j.core.base.BaseServiceImpl;
  */
 @CacheConfig(cacheNames = "sysMsgConfig")
 @Service(interfaceClass = SysMsgConfigService.class)
-@MotanService(interfaceClass = SysMsgConfigService.class)
 public class SysMsgConfigServiceImpl extends BaseServiceImpl<SysMsgConfig, SysMsgConfigMapper>
 implements SysMsgConfigService {
 

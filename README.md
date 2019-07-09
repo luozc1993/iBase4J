@@ -1,5 +1,9 @@
 [![License](http://img.shields.io/:license-apache-blue.svg "2.0")](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![JDK 1.8](https://img.shields.io/badge/JDK-1.8-green.svg "JDK 1.8")]()
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE_CN)
+[![star](https://gitee.com/iBase4J/iBase4J/badge/star.svg?theme=dark)](https://gitee.com/iBase4J/iBase4J/stargazers)
+[![fork](https://gitee.com/iBase4J/iBase4J/badge/fork.svg?theme=dark)](https://gitee.com/iBase4J/iBase4J/members)
 
 ## iBase4J项目简介
 
@@ -41,11 +45,9 @@
     	 	SysServiceApplication.java
     	 	SysWebApplication.java
     * 测试环境打包命令：
-    	 clean package -P test -f pom-sys-service-server.xml
-    	 clean package -P test -f pom-sys-web-server.xml
+    	 clean package -P test
     * 生产环境打包命令：
-    	 clean package -P product -f pom-sys-service-server.xml
-    	 clean package -P product -f pom-sys-web-server.xml
+    	 clean package -P product
     
 ## 版权声明
 iBase4J使用 [Apache License 2.0][] 协议.
@@ -73,5 +75,6 @@ iBase4J is released under version 2.0 of the [Apache License][].
 
 ![捐赠](http://git.oschina.net/iBase4J/iBase4J/raw/master/img/contribute.png "捐赠")
 
+[iBase4J-common源码]: https://gitee.com/iBase4J/iBase4J-Common
 [Apache License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0

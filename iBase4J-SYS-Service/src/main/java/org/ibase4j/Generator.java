@@ -3,6 +3,7 @@ package org.ibase4j;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -10,7 +11,6 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
@@ -41,7 +41,7 @@ public class Generator {
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("buzhidao");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/ibase4j?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/ibase4j?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&allowMultiQueries=true&serverTimezone=PRC&useSSL=false");
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
@@ -75,7 +75,7 @@ public class Generator {
             @Override
             public void initMap() {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("rpcService", false);
+                map.put("rpcService", true);
                 this.setMap(map);
             }
         };
@@ -85,7 +85,7 @@ public class Generator {
         pc.setParent("org.ibase4j");
         pc.setEntity("model");
         pc.setMapper("mapper");
-        pc.setXml("mapper");
+        pc.setXml("mapper.xml");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
         pc.setController("web");
